@@ -1,0 +1,52 @@
+[
+    {
+        "id": "1",
+        "First Name": "Barleen",
+        "Middle Name": "",
+        "Last Name": "Dhaliwal",
+        "Email": "barleen@soe.com",
+        "Phone Number": "99999999",
+        "Role": 2,
+        "Address": "4133"
+    },
+    {
+        "id": "2",
+        "First Name": "Jai",
+        "Middle Name": "",
+        "Last Name": "Sharma",
+        "Email": "xyz@sourcefuse.com",
+        "Phone Number": "900900090",
+        "Role":1,
+        "Address": "8A"
+    },
+    {
+        "id": "3",
+        "First Name": "Harry",
+        "Middle Name": "Singh",
+        "Last Name": "Chahal",
+        "Email": "abc@abc.com",
+        "Phone Number": "809090809",
+        "Role": 2,
+        "Address": "Mohali"
+    },
+    {
+        "id": "4",
+        "First Name": "Palak",
+        "Middle Name": "",
+        "Last Name": "Bansal",
+        "Email": "abc@abc.com",
+        "Phone Number": "809079809",
+        "Role": 0,
+        "Address": "Zirakpur"
+    },
+    {
+        "id": "5",
+        "First Name": "Priyanka",
+        "Middle Name": "Kaur",
+        "Last Name": "",
+        "Email": "xyz@abc.com",
+        "Phone Number": "909090456",
+        "Role": 1,
+        "Address": "Lucknow"
+    }
+]
