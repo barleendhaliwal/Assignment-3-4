@@ -1,5 +1,4 @@
 "use strict";
-/// <reference path="./node_modules/@types/jquery/JQuery.d.ts" />;
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -45,166 +44,163 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
-// const data = require('./data.json')
-// console.log(data[0].Address);
-//import * as data from './data.json';
 var Role;
 (function (Role) {
-    Role[Role["SuperAdmin"] = 0] = "SuperAdmin";
-    Role[Role["Admin"] = 1] = "Admin";
-    Role[Role["Subscriber"] = 2] = "Subscriber";
+    Role[Role["SUPERADMIN"] = 0] = "SUPERADMIN";
+    Role[Role["ADMIN"] = 1] = "ADMIN";
+    Role[Role["SUBSCRIBER"] = 2] = "SUBSCRIBER";
 })(Role || (Role = {}));
 ;
 var users = [];
-var data = [
+var DATA = [
     {
         "id": "1",
-        "First Name": "Barleen",
-        "Middle Name": "",
-        "Last Name": "Dhaliwal",
-        "Email": "barleen@soe.com",
-        "Phone Number": "99999999",
-        "Role": Role.Subscriber,
-        "Address": "4133"
+        "firstName": "Barleen",
+        "middleName": "",
+        "lastName": "Dhaliwal",
+        "email": "barleen@soe.com",
+        "phoneNumber": "99999999",
+        "role": Role.SUBSCRIBER,
+        "address": "4133"
     },
     {
         "id": "2",
-        "First Name": "Jai",
-        "Middle Name": "",
-        "Last Name": "Sharma",
-        "Email": "xyz@sourcefuse.com",
-        "Phone Number": "900900090",
-        "Role": Role.Admin,
-        "Address": "8A"
+        "firstName": "Jai",
+        "middleName": "",
+        "lastName": "Sharma",
+        "email": "xyz@sourcefuse.com",
+        "phoneNumber": "900900090",
+        "role": Role.ADMIN,
+        "address": "8A"
     },
     {
         "id": "3",
-        "First Name": "Harry",
-        "Middle Name": "Singh",
-        "Last Name": "Chahal",
-        "Email": "abc@abc.com",
-        "Phone Number": "809090809",
-        "Role": Role.Subscriber,
-        "Address": "Mohali"
+        "firstName": "Harry",
+        "middleName": "Singh",
+        "lastName": "Chahal",
+        "email": "abc@abc.com",
+        "phoneNumber": "809090809",
+        "role": Role.SUBSCRIBER,
+        "address": "Mohali"
     },
     {
         "id": "4",
-        "First Name": "Palak",
-        "Middle Name": "",
-        "Last Name": "Bansal",
-        "Email": "abc@abc.com",
-        "Phone Number": "809079809",
-        "Role": Role.SuperAdmin,
-        "Address": "Zirakpur"
+        "firstName": "Palak",
+        "middleName": "",
+        "lastName": "Bansal",
+        "email": "abc@abc.com",
+        "phoneNumber": "809079809",
+        "role": Role.SUPERADMIN,
+        "address": "Zirakpur"
     },
     {
         "id": "5",
-        "First Name": "Priyanka",
-        "Middle Name": "Kaur",
-        "Last Name": "",
-        "Email": "xyz@abc.com",
-        "Phone Number": "909090456",
-        "Role": Role.Admin,
-        "Address": "Lucknow"
+        "firstName": "Priyanka",
+        "middleName": "Kaur",
+        "lastName": "",
+        "email": "xyz@abc.com",
+        "phoneNumber": "909090456",
+        "role": Role.ADMIN,
+        "address": "Lucknow"
     }
 ];
-//DECORATOR FUNCTION
+//DECORATOR FUNCTION - naming convention for Decorators - Pascal Case
 function FormatDate() {
     return function (target, name, descriptor) {
-        var dtm = document.getElementById("date_time");
-        dtm.innerHTML = new Date().toLocaleString();
+        var dateTime = document.getElementById("dateTime");
+        dateTime.innerHTML = new Date().toLocaleString();
         setInterval(function () {
-            dtm.innerHTML = new Date().toLocaleString();
+            dateTime.innerHTML = new Date().toLocaleString();
         }, 1000);
     };
 }
-var CRUD = /** @class */ (function () {
-    function CRUD() {
+var Crud = /** @class */ (function () {
+    function Crud() {
         this.items = [];
     }
-    CRUD.prototype.create = function (e) {
+    Crud.prototype.create = function (e) {
         this.items.push(e);
     };
-    CRUD.prototype.update = function (i, e) {
+    Crud.prototype.update = function (i, e) {
         this.items[i] = e;
-        showtable();
+        showTable();
     };
-    CRUD.prototype.delete = function (i) {
+    Crud.prototype.delete = function (i) {
         this.items.splice(i, 1);
         console.log(this.items);
-        showtable();
+        showTable();
     };
     __decorate([
         FormatDate(),
         __metadata("design:type", Function),
         __metadata("design:paramtypes", [Object]),
         __metadata("design:returntype", void 0)
-    ], CRUD.prototype, "create", null);
-    return CRUD;
+    ], Crud.prototype, "create", null);
+    return Crud;
 }());
-function showtable() {
+function showTable() {
     var table = document.createElement("table"); // TS knows that only a generic html element is returned by createElement, hence we need to specify
     table.className = 'table table-hover';
     // EXTRACT VALUE FOR HTML HEADER. 
     var tr = table.insertRow(-1);
-    var header_elements = ["ID", "First Name", "Middle Name", "Last Name", "Email", "Phone Number", "Role", "Address"];
-    for (var i = 0; i < header_elements.length; i++) {
+    var headerElements = ["ID", "First Name", "Middle Name", "Last Name", "Email", "Phone Number", "Role", "Address"];
+    for (var i = 0; i < headerElements.length; i++) {
         var th = document.createElement("th"); // TABLE HEADER.
-        th.innerHTML = header_elements[i];
+        th.innerHTML = headerElements[i];
         tr.appendChild(th);
     }
-    var th_edit = document.createElement("th"); // TABLE HEADER.
-    th_edit.innerHTML = "Edit";
-    tr.appendChild(th_edit);
-    var th_delete = document.createElement("th"); // TABLE HEADER.
-    th_delete.innerHTML = "Delete";
-    tr.appendChild(th_delete);
-    var th_save = document.createElement("th"); // TABLE HEADER. 
-    th_save.innerHTML = "Save";
-    tr.appendChild(th_save);
-    var th_cancel = document.createElement("th"); // TABLE HEADER. 
-    th_cancel.innerHTML = "Cancel";
-    tr.appendChild(th_cancel);
-    th_save.style.display = "none";
-    th_cancel.style.display = "none";
-    th_save.id = "header_save";
-    th_cancel.id = "header_cancel";
+    var thEdit = document.createElement("th"); // TABLE HEADER.
+    thEdit.innerHTML = "Edit";
+    tr.appendChild(thEdit);
+    var thDelete = document.createElement("th"); // TABLE HEADER.
+    thDelete.innerHTML = "Delete";
+    tr.appendChild(thDelete);
+    var thSave = document.createElement("th"); // TABLE HEADER. 
+    thSave.innerHTML = "Save";
+    tr.appendChild(thSave);
+    var thCancel = document.createElement("th"); // TABLE HEADER. 
+    thCancel.innerHTML = "Cancel";
+    tr.appendChild(thCancel);
+    thSave.style.display = "none";
+    thCancel.style.display = "none";
+    thSave.id = "headerSave";
+    thCancel.id = "headerCancel";
     var _loop_1 = function (i) {
         tr = table.insertRow(-1);
         tr.id = "row" + (i);
         var cell1 = tr.insertCell(-1);
         var id = users.items[i].id;
         cell1.innerHTML = id;
-        cell1.id = "row_" + (i) + "_id";
+        cell1.id = "row" + (i) + "Id";
         var cell2 = tr.insertCell(-1);
-        var fname = users.items[i]["First Name"];
+        var fname = users.items[i].firstName;
         cell2.innerHTML = fname;
-        cell2.id = "row_" + (i) + "_fname";
+        cell2.id = "row" + (i) + "Fname";
         var cell3 = tr.insertCell(-1);
-        var mname = users.items[i]["Middle Name"];
+        var mname = users.items[i].middleName;
         ;
         cell3.innerHTML = mname;
-        cell3.id = "row_" + (i) + "_mname";
+        cell3.id = "row" + (i) + "Mname";
         var cell4 = tr.insertCell(-1);
-        var lname = users.items[i]["Last Name"];
+        var lname = users.items[i].lastName;
         cell4.innerHTML = lname;
-        cell4.id = "row_" + (i) + "_lname";
+        cell4.id = "row" + (i) + "Lname";
         var cell5 = tr.insertCell(-1);
-        var email = users.items[i].Email;
+        var email = users.items[i].email;
         cell5.innerHTML = email;
-        cell5.id = "row_" + (i) + "_email";
+        cell5.id = "row" + (i) + "Email";
         var cell6 = tr.insertCell(-1);
-        var phone = users.items[i]["Phone Number"];
+        var phone = users.items[i].phoneNumber;
         cell6.innerHTML = phone;
-        cell6.id = "row_" + (i) + "_phone";
+        cell6.id = "row" + (i) + "Phone";
         var cell7 = tr.insertCell(-1);
-        var role = Role[users.items[i].Role];
+        var role = Role[users.items[i].role];
         cell7.innerHTML = role;
-        cell7.id = "row_" + (i) + "_role";
+        cell7.id = "row" + (i) + "Role";
         var cell8 = tr.insertCell(-1);
-        var add = users.items[i].Address;
+        var add = users.items[i].address;
         cell8.innerHTML = add;
-        cell8.id = "row_" + (i) + "_address";
+        cell8.id = "row" + (i) + "Address";
         cell1.className = "editable";
         cell2.className = "editable";
         cell3.className = "editable";
@@ -215,53 +211,53 @@ function showtable() {
         cell8.className = "editable";
         //BUTTONS ON EACH ROW
         //EDIT
-        var cell_for_edit_button = tr.insertCell(-1);
-        var edit_button = document.createElement('button');
-        edit_button.type = 'button';
-        edit_button.innerHTML = 'Edit';
-        cell_for_edit_button.appendChild(edit_button);
-        edit_button.addEventListener('click', function () { edit_row(i); });
+        var cellForEditButton = tr.insertCell(-1);
+        var editButton = document.createElement('button');
+        editButton.type = 'button';
+        editButton.innerHTML = 'Edit';
+        cellForEditButton.appendChild(editButton);
+        editButton.addEventListener('click', function () { editRow(i); });
         //DELETE
-        var cell_for_delete_button = tr.insertCell(-1);
-        var delete_button = document.createElement('button');
-        delete_button.type = 'button';
-        delete_button.innerHTML = 'Delete';
-        cell_for_delete_button.appendChild(delete_button);
-        delete_button.addEventListener('click', function () { users.delete(i); });
+        var cellForDeleteButton = tr.insertCell(-1);
+        var deleteButton = document.createElement('button');
+        deleteButton.type = 'button';
+        deleteButton.innerHTML = 'Delete';
+        cellForDeleteButton.appendChild(deleteButton);
+        deleteButton.addEventListener('click', function () { users.delete(i); });
         //SAVE
-        var cell_for_save_button = tr.insertCell(-1);
-        var save_button = document.createElement('button');
-        save_button.type = 'button';
-        save_button.innerHTML = 'Save';
-        cell_for_save_button.className = 'hidden_elements';
-        cell_for_save_button.id = 'save_buttonrow' + i;
-        cell_for_save_button.appendChild(save_button);
-        cell_for_save_button.style.display = "none";
-        save_button.addEventListener('click', function () {
-            var updated_row_object = get_current_row_data(i);
-            console.log(updated_row_object);
-            users.update(i, updated_row_object);
-            var save_button = document.getElementById("save_buttonrow" + i);
-            var cancel_button = document.getElementById("cancel_buttonrow" + i);
-            var header_save = document.getElementById("header_save");
-            var header_cancel = document.getElementById("header_cancel");
-            save_button.style.display = "none";
-            cancel_button.style.display = "none";
-            header_save.style.display = "none";
-            header_cancel.style.display = "none";
+        var cellForSaveButton = tr.insertCell(-1);
+        var saveButton = document.createElement('button');
+        saveButton.type = 'button';
+        saveButton.innerHTML = 'Save';
+        cellForSaveButton.className = 'hiddenElements';
+        cellForSaveButton.id = 'saveButtonRow' + i;
+        cellForSaveButton.appendChild(saveButton);
+        cellForSaveButton.style.display = "none";
+        saveButton.addEventListener('click', function () {
+            var updatedRowObject = getCurrentRowData(i);
+            console.log(updatedRowObject);
+            users.update(i, updatedRowObject);
+            var saveButton = document.getElementById("saveButtonRow" + i);
+            var cancelButton = document.getElementById("cancelButtonRow" + i);
+            var headerSave = document.getElementById("headerSave");
+            var headerCancel = document.getElementById("headerCancel");
+            saveButton.style.display = "none";
+            cancelButton.style.display = "none";
+            headerSave.style.display = "none";
+            headerCancel.style.display = "none";
         });
         //CANCEL
-        cell_for_cancel_button = tr.insertCell(-1);
-        cancel_button = document.createElement('button');
-        cancel_button.type = 'button';
-        cancel_button.innerHTML = 'Cancel';
-        cell_for_cancel_button.className = 'hidden_elements';
-        cell_for_cancel_button.id = 'cancel_buttonrow' + (i);
-        cell_for_cancel_button.appendChild(cancel_button);
-        cell_for_cancel_button.style.display = "none";
-        cancel_button.addEventListener('click', function () { cancel_row(i); });
+        cellForCancelButton = tr.insertCell(-1);
+        cancelButton = document.createElement('button');
+        cancelButton.type = 'button';
+        cancelButton.innerHTML = 'Cancel';
+        cellForCancelButton.className = 'hiddenElements';
+        cellForCancelButton.id = 'cancelButtonRow' + (i);
+        cellForCancelButton.appendChild(cancelButton);
+        cellForCancelButton.style.display = "none";
+        cancelButton.addEventListener('click', function () { cancelRow(i); });
     };
-    var cell_for_cancel_button, cancel_button;
+    var cellForCancelButton, cancelButton;
     //populate from json file
     for (var i = 0; i < users.items.length; i++) {
         _loop_1(i);
@@ -269,115 +265,115 @@ function showtable() {
     var divContainer = document.getElementById("showData");
     divContainer.innerHTML = "";
     divContainer.appendChild(table);
-    var load_button = document.getElementById("show_data_button");
-    load_button.value = "Refresh";
+    var loadButton = document.getElementById("showDataButton");
+    loadButton.value = "Refresh";
 }
-function get_current_row_data(no) {
-    var row_id = document.getElementById("row_" + no + "_id").innerHTML;
-    var row_fname = document.getElementById("row_" + no + "_fname").innerHTML;
-    var row_mname = document.getElementById("row_" + no + "_mname").innerHTML;
-    var row_lname = document.getElementById("row_" + no + "_lname").innerHTML;
-    var row_email = document.getElementById("row_" + no + "_email").innerHTML;
-    var row_phone = document.getElementById("row_" + no + "_phone").innerHTML;
-    var row_role = document.getElementById("row_" + no + "_role").innerHTML;
-    var row_address = document.getElementById("row_" + no + "_address").innerHTML;
+function getCurrentRowData(no) {
+    var rowId = document.getElementById("row" + no + "Id").innerHTML;
+    var rowFname = document.getElementById("row" + no + "Fname").innerHTML;
+    var rowMname = document.getElementById("row" + no + "Mname").innerHTML;
+    var rowLname = document.getElementById("row" + no + "Lname").innerHTML;
+    var rowEmail = document.getElementById("row" + no + "Email").innerHTML;
+    var rowPhone = document.getElementById("row" + no + "Phone").innerHTML;
+    var rowRole = document.getElementById("row" + no + "Role").innerHTML;
+    var rowAddress = document.getElementById("row" + no + "Address").innerHTML;
     var r = -1;
-    if (row_role.toLowerCase() === "SuperAdmin")
+    if (rowRole.toLowerCase() === "superadmin")
         r = 0;
-    else if (row_role.toLowerCase() === "Admin")
+    else if (rowRole.toLowerCase() === "admin")
         r = 1;
     else
         r = 2;
     var obj = {
-        id: row_id,
-        "First Name": row_fname,
-        "Middle Name": row_mname,
-        "Last Name": row_lname,
-        Email: row_email,
-        "Phone Number": row_phone,
-        Role: r,
-        Address: row_address
+        id: rowId,
+        firstName: rowFname,
+        middleName: rowMname,
+        lastName: rowLname,
+        email: rowEmail,
+        phoneNumber: rowPhone,
+        role: r,
+        address: rowAddress
     };
     return obj;
 }
-function cancel_row(no) {
+function cancelRow(no) {
     var row = 'row' + no;
-    var current_row = document.getElementById(row);
-    current_row.style.background = "white";
+    var currentRow = document.getElementById(row);
+    currentRow.style.background = "white";
     //REVERT BACK TO ORIGINAL CONTENT
-    var row_id = document.getElementById("row_" + no + "_id");
-    var row_fname = document.getElementById("row_" + no + "_fname");
-    var row_mname = document.getElementById("row_" + no + "_mname");
-    var row_lname = document.getElementById("row_" + no + "_lname");
-    var row_email = document.getElementById("row_" + no + "_email");
-    var row_phone = document.getElementById("row_" + no + "_phone");
-    var row_role = document.getElementById("row_" + no + "_role");
-    var row_address = document.getElementById("row_" + no + "_address");
-    row_id.innerHTML = users.items[no].id;
-    row_fname.innerHTML = users.items[no]["First Name"];
-    row_mname.innerHTML = users.items[no]["Middle Name"];
-    row_lname.innerHTML = users.items[no]["Last Name"];
-    row_email.innerHTML = users.items[no].Email;
-    row_phone.innerHTML = users.items[no]["Phone Number"];
-    row_role.innerHTML = Role[users.items[no].Role];
-    row_address.innerHTML = users.items[no].Address;
+    var rowId = document.getElementById("row" + no + "Id");
+    var rowFname = document.getElementById("row" + no + "Fname");
+    var rowMname = document.getElementById("row" + no + "Mname");
+    var rowLname = document.getElementById("row" + no + "Lname");
+    var rowEmail = document.getElementById("row" + no + "Email");
+    var rowPhone = document.getElementById("row" + no + "Phone");
+    var rowRole = document.getElementById("row" + no + "Role");
+    var rowAddress = document.getElementById("row" + no + "Address");
+    rowId.innerHTML = users.items[no].id;
+    rowFname.innerHTML = users.items[no].firstName;
+    rowMname.innerHTML = users.items[no].middleName;
+    rowLname.innerHTML = users.items[no].lastName;
+    rowEmail.innerHTML = users.items[no].email;
+    rowPhone.innerHTML = users.items[no].phoneNumber;
+    rowRole.innerHTML = Role[users.items[no].role];
+    rowAddress.innerHTML = users.items[no].address;
     //MAKE ROWS NON EDITABLE
-    row_id.setAttribute("contenteditable", "false");
-    row_fname.setAttribute("contenteditable", "false");
-    row_mname.setAttribute("contenteditable", "false");
-    row_lname.setAttribute("contenteditable", "false");
-    row_email.setAttribute("contenteditable", "false");
-    row_phone.setAttribute("contenteditable", "false");
-    row_role.setAttribute("contenteditable", "false");
-    row_address.setAttribute("contenteditable", "false");
+    rowId.setAttribute("contenteditable", "false");
+    rowFname.setAttribute("contenteditable", "false");
+    rowMname.setAttribute("contenteditable", "false");
+    rowLname.setAttribute("contenteditable", "false");
+    rowEmail.setAttribute("contenteditable", "false");
+    rowPhone.setAttribute("contenteditable", "false");
+    rowRole.setAttribute("contenteditable", "false");
+    rowAddress.setAttribute("contenteditable", "false");
     //HIDE SAVE AND DELETE COLUMNS
-    var save_button = document.getElementById("save_buttonrow" + no);
-    var cancel_button = document.getElementById("cancel_buttonrow" + no);
-    var header_save = document.getElementById("header_save");
-    var header_cancel = document.getElementById("header_cancel");
-    save_button.style.display = "none";
-    cancel_button.style.display = "none";
-    header_save.style.display = "none";
-    header_cancel.style.display = "none";
+    var saveButton = document.getElementById("saveButtonRow" + no);
+    var cancelButton = document.getElementById("cancelButtonRow" + no);
+    var headerSave = document.getElementById("headerSave");
+    var headerCancel = document.getElementById("headerCancel");
+    saveButton.style.display = "none";
+    cancelButton.style.display = "none";
+    headerSave.style.display = "none";
+    headerCancel.style.display = "none";
 }
 //MAKES THE CONTENT OF CURRENT ROW EDITABLE
-function edit_row(no) {
-    var current_row = document.getElementById("row" + no);
-    current_row.style.background = "yellow";
+function editRow(no) {
+    var currentRow = document.getElementById("row" + no);
+    currentRow.style.background = "yellow";
     //SHOW SAVE & CANCEL BUTTON
-    var save_button = document.getElementById("save_buttonrow" + no);
-    var cancel_button = document.getElementById("cancel_buttonrow" + no);
-    var header_save = document.getElementById("header_save");
-    var header_cancel = document.getElementById("header_cancel");
-    save_button.style.display = "";
-    cancel_button.style.display = "";
-    header_save.style.display = "";
-    header_cancel.style.display = "";
+    var saveButton = document.getElementById("saveButtonRow" + no);
+    var cancelButton = document.getElementById("cancelButtonRow" + no);
+    var headerSave = document.getElementById("headerSave");
+    var headerCancel = document.getElementById("headerCancel");
+    saveButton.style.display = "";
+    cancelButton.style.display = "";
+    headerSave.style.display = "";
+    headerCancel.style.display = "";
     //MAKE ROW EDITABLE 
-    var row_id = document.getElementById("row_" + no + "_id");
-    var row_fname = document.getElementById("row_" + no + "_fname");
-    var row_mname = document.getElementById("row_" + no + "_mname");
-    var row_lname = document.getElementById("row_" + no + "_lname");
-    var row_email = document.getElementById("row_" + no + "_email");
-    var row_phone = document.getElementById("row_" + no + "_phone");
-    var row_role = document.getElementById("row_" + no + "_role");
-    var row_address = document.getElementById("row_" + no + "_address");
-    row_id.setAttribute("contenteditable", "true");
-    row_fname.setAttribute("contenteditable", "true");
-    row_mname.setAttribute("contenteditable", "true");
-    row_lname.setAttribute("contenteditable", "true");
-    row_email.setAttribute("contenteditable", "true");
-    row_phone.setAttribute("contenteditable", "true");
-    row_role.setAttribute("contenteditable", "true");
-    row_address.setAttribute("contenteditable", "true");
+    var rowId = document.getElementById("row" + no + "Id");
+    var rowFname = document.getElementById("row" + no + "Fname");
+    var rowMname = document.getElementById("row" + no + "Mname");
+    var rowLname = document.getElementById("row" + no + "Lname");
+    var rowEmail = document.getElementById("row" + no + "Email");
+    var rowPhone = document.getElementById("row" + no + "Phone");
+    var rowRole = document.getElementById("row" + no + "Role");
+    var rowAddress = document.getElementById("row" + no + "Address");
+    rowId.setAttribute("contenteditable", "true");
+    rowFname.setAttribute("contenteditable", "true");
+    rowMname.setAttribute("contenteditable", "true");
+    rowLname.setAttribute("contenteditable", "true");
+    rowEmail.setAttribute("contenteditable", "true");
+    rowPhone.setAttribute("contenteditable", "true");
+    rowRole.setAttribute("contenteditable", "true");
+    rowAddress.setAttribute("contenteditable", "true");
 }
 function main() {
     return __awaiter(this, void 0, void 0, function () {
         return __generator(this, function (_a) {
-            users = new CRUD(); //creating object of crud with generic type of user
-            data.forEach(function (e) { users.create(e); }); //pushing objects of user type in array
+            users = new Crud(); //creating object of crud with generic type of user
+            DATA.forEach(function (e) { users.create(e); }); //pushing objects of user type in array
             console.log(users);
-            showtable();
+            showTable();
             return [2 /*return*/];
         });
     });
